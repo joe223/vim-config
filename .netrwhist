@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/admin/.config/nvim'
+let g:netrw_dirhist_2='/Users/admin/.config'
+let g:netrw_dirhist_1='/Users/admin'
+let g:netrw_dirhist_0='/Users/admin/code/byted-service/packages/consul'
+let g:netrw_dirhist_9='/Users/admin/code/byted-service/packages'
+let g:netrw_dirhist_8='/Users/admin/code/byted-service'
+let g:netrw_dirhist_7='/Users/admin/code/tiktok_mint/node_modules/@byted-service/consul/lib'
+let g:netrw_dirhist_6='/Users/admin/code/tiktok_mint/node_modules/@byted-service/consul'
+let g:netrw_dirhist_5='/usr/local/etc/nginx/www'
+let g:netrw_dirhist_4='/usr/local/etc/nginx'
