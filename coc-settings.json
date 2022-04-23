@@ -6,7 +6,7 @@
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
     "suggest.floatEnable": true,        
-    "suggest.enablePreview": false,
+    "suggest.enablePreview": true,
     "suggest.autoTrigger": "always",
     "suggest.triggerAfterInsertEnter": true,
     "suggest.acceptSuggestionOnCommitCharacter": true,
@@ -16,6 +16,18 @@
     "diagnostic.infoSign": "",
     "diagnostic.hintSign": "",
     "signature.target": "float",
+    "diagnostic.floatConfig": {
+        "border": true
+    },
+    "suggest.floatConfig": {
+        "border": true
+    },
+    "signature.floatConfig": {
+        "border": true
+    },
+    "hover.floatConfig": {
+        "border": true
+    },
     "hover.target": "float",
     "eslint.autoFixOnSave": false,
     "prettier.ignorePath": "~/code/**/*",

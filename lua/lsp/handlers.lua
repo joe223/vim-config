@@ -1,4 +1,13 @@
 local M = {}
+local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
+}
+for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
 
 local config = {
     -- disable virtual text
@@ -7,8 +16,8 @@ local config = {
     signs = {
       active = signs,
     },
-    update_in_insert = true,
-    underline = true,
+    update_in_insert = false,
+    underline = false,
     severity_sort = true,
     float = {
       focusable = false,
@@ -20,19 +29,21 @@ local config = {
     },
 }
 M.setup = function ()
-    vim.lsp.handlers["textDocument/hover"] = function ()
-        return "hello"        
-    end
-    vim.lsp.handlers["textDocument/signatureHelp"] = function ()
-       return "world !!" 
-    end
-    vim.cmd [[nnoremap <buffer><silent> <C-h> :lua vim.lsp.diagnostic.show_line_diagnostics({ border = "border" })<CR>]]
-    vim.cmd [[nnoremap <buffer><silent> ]g :lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "border" }})<CR>]]
-    vim.cmd [[nnoremap <buffer><silent> [g :lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "border" }})<CR>]]
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+       vim.lsp.handlers.hover, {
+         -- Use a sharp border with `FloatBorder` highlights
+         border = "rounded"
+       }
+    )
+
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+       vim.lsp.handlers.signature_help, {
+         -- Use a sharp border with `FloatBorder` highlights
+         border = "rounded"
+       }
+    )
 
     vim.diagnostic.config(config)
 end
-
-print("LSP Hander ====")
 
 return M

@@ -136,7 +136,7 @@ local mappings = {
   A = {
     name = "CodeAction",
 
-    r = { "<plug>(coc-rename)", "Rename Variables"},
+    r = { "<plug>(coc-rename)<cr>", "Rename Variables"},
     o = { "<cmd>CocList outline<cr>", "Show Outline"},
   }
 
