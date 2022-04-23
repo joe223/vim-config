@@ -7,7 +7,7 @@ if exists('+termguicolors')
 endif
 
 let g:fzf_layout = { 'down': '~80%'}
-
+let g:far#enable_undo=1
 
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -15,8 +15,19 @@ let g:fzf_layout = { 'down': '~80%'}
 call plug#begin('~/.vim/plugged')
 
 Plug 'folke/which-key.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+
+" LSP
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'williamboman/nvim-lsp-installer'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+"Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-cmdline'
+"Plug 'hrsh7th/nvim-cmp'
+"Plug 'saadparwaiz1/cmp_luasnip'
+"Plug 'L3MON4D3/LuaSnip'
+
+
 " Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -33,17 +44,18 @@ Plug 'lewis6991/gitsigns.nvim'
 
 
 " Themes
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 "Plug 'joshdick/onedark.vim'
 Plug 'Mofiqul/vscode.nvim'
+Plug 'doums/darcula'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Project manage
 Plug 'rmagatti/auto-session'
 Plug 'rmagatti/session-lens'
-Plug 'nvim-pack/nvim-spectre'
-
-Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'nvim-pack/nvim-spectre'
 Plug 'folke/trouble.nvim'
+Plug 'brooth/far.vim'
 
 " Nvim Treesitter configurations and abstraction layer & highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -61,20 +73,24 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mattn/emmet-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mhinz/vim-startify'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'psliwka/vim-smoothie'
 Plug 'scrooloose/nerdcommenter'
+
 " Performance issue in monorepo
 " Plug 'nvim-lualine/lualine.nvim'
+
+"Status line
 Plug 'feline-nvim/feline.nvim'
+
 " Plug 'dense-analysis/ale'
-" Plug 'doums/darcula'
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'wfxr/minimap.vim'
 Plug 'petertriho/nvim-scrollbar'
+            
+" Code manage
 Plug 'stevearc/aerial.nvim' " A code outline window for skimming and quick navigation
-
-" Plug 'joshdick/onedark.vim', {'as' : 'onedark'}
+Plug 'sheerun/vim-polyglot'
 
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -92,7 +108,7 @@ lua << EOF
 require "init"
 EOF
 
-
+source $HOME/.config/nvim/settings/coc.vim
 
 inoremap jk <ESC>
 
@@ -152,7 +168,7 @@ let g:vscode_italic_comment = 1
 " Disable nvim-tree background color
 let g:vscode_disable_nvimtree_bg = v:true
 
-colorscheme gruvbox  
+colorscheme darcula  
 " let g:airline_theme = 'vscode'
 
 " from readme

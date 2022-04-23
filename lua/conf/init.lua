@@ -13,6 +13,8 @@ require "conf.nvim-notify"
 require "conf.barbar"
 require "conf.auto-session"
 require "conf.whichkey"
-require "conf.lspconfig"
 
+-- LSP
+-- Autocomplete
+--require "conf.cmp"
 
