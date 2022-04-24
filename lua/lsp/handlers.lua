@@ -81,11 +81,8 @@ end
 -- end
 
 M.on_attach = function(client, bufnr)
-  -- vim.notify(client.name .. " starting...")
+   vim.notify(client.name .. " starting...")
   -- TODO: refactor this into a method that checks if string in list
-  if client.name == "tsserver" or client.name == "html" or client.name == "jdt.ls" then
-    client.resolved_capabilities.document_formatting = false
-  end
 
   if client.name == "jdt.ls" then
     require("jdtls").setup_dap { hotcodereplace = "auto" }
@@ -94,6 +91,7 @@ M.on_attach = function(client, bufnr)
   end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
+  require("aerial").on_attach(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

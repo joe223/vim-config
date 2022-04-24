@@ -1,4 +1,7 @@
 set cursorline
+set undodir=~/.vim/undo-dir
+set undofile
+set history=1000
 
 if exists('+termguicolors')
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -17,15 +20,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'folke/which-key.nvim'
 
 " LSP
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'williamboman/nvim-lsp-installer'
-"Plug 'hrsh7th/cmp-nvim-lsp'
-"Plug 'hrsh7th/cmp-buffer'
-"Plug 'hrsh7th/cmp-path'
-"Plug 'hrsh7th/cmp-cmdline'
-"Plug 'hrsh7th/nvim-cmp'
-"Plug 'saadparwaiz1/cmp_luasnip'
-"Plug 'L3MON4D3/LuaSnip'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
 
 
 " Plug 'liuchengxu/vista.vim'
@@ -73,7 +76,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mattn/emmet-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'psliwka/vim-smoothie'
 Plug 'scrooloose/nerdcommenter'
 
@@ -96,7 +99,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " UI Settings
-Plug 'romgrk/barbar.nvim' " Tabbar
+"Plug 'romgrk/barbar.nvim' " Tabbar
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'rcarriga/nvim-notify'
 Plug 'stevearc/dressing.nvim'
 
@@ -108,7 +112,9 @@ lua << EOF
 require "init"
 EOF
 
-source $HOME/.config/nvim/settings/coc.vim
+if has_key(plugs, "coc.nvim")
+    source $HOME/.config/nvim/settings/coc.vim
+endif
 
 inoremap jk <ESC>
 
@@ -168,7 +174,7 @@ let g:vscode_italic_comment = 1
 " Disable nvim-tree background color
 let g:vscode_disable_nvimtree_bg = v:true
 
-colorscheme darcula  
+colorscheme darcula
 " let g:airline_theme = 'vscode'
 
 " from readme

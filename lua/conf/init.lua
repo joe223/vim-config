@@ -10,11 +10,12 @@ require "conf.trouble"
 require "conf.dressing"
 require "conf.nvim-notify"
 
-require "conf.barbar"
+--require "conf.barbar"
+require "conf.bufferline"
 require "conf.auto-session"
 require "conf.whichkey"
 
 -- LSP
 -- Autocomplete
---require "conf.cmp"
+require "conf.cmp"
 
