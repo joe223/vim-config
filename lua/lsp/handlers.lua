@@ -1,10 +1,12 @@
 local M = {}
 local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
 }
+--https://github.dev/savq/melange/blob/master/colors/melange.vim
+
 for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
@@ -28,6 +30,36 @@ local config = {
       prefix = "",
     },
 }
+
+local function diagnostic_highlight()
+    require("todo-comments").setup({})
+
+    vim.highlight.create(
+      "DiagnosticUnderlineWarn",
+      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#EBCB8B" },
+      false
+    )
+    vim.highlight.create(
+      "DiagnosticUnderlineError",
+      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#BF616A" },
+      false
+    )
+    vim.highlight.create(
+      "DiagnosticUnderlineInfo",
+      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#88C0D0" },
+      false
+    )
+    vim.highlight.create(
+      "DiagnosticUnderlineHint",
+      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#5E81AC" },
+      false
+    )
+    vim.highlight.create("DiagnosticWarn", { ctermfg = "3", guifg = "#EBCB8B" }, false)
+    vim.highlight.create("DiagnosticError", { ctermfg = "1", guifg = "#BF616A" }, false)
+    vim.highlight.create("DiagnosticInfo", { ctermfg = "4", guifg = "#88C0D0" }, false)
+    vim.highlight.create("DiagnosticHint", { ctermfg = "7", guifg = "#5E81AC" }, false)
+end
+
 M.setup = function ()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
        vim.lsp.handlers.hover, {
@@ -44,8 +76,8 @@ M.setup = function ()
     )
 
     vim.diagnostic.config(config)
+    diagnostic_highlight()
 end
-
 
 local function lsp_highlight_document(client)
   if client.resolved_capabilities.document_highlight then

@@ -59,6 +59,7 @@ Plug 'rmagatti/session-lens'
 " Plug 'nvim-pack/nvim-spectre'
 Plug 'folke/trouble.nvim'
 Plug 'brooth/far.vim'
+Plug 'folke/todo-comments.nvim'
 
 " Nvim Treesitter configurations and abstraction layer & highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -99,7 +100,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " UI Settings
-"Plug 'romgrk/barbar.nvim' " Tabbar
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'rcarriga/nvim-notify'
 Plug 'stevearc/dressing.nvim'
@@ -115,6 +115,7 @@ EOF
 if has_key(plugs, "coc.nvim")
     source $HOME/.config/nvim/settings/coc.vim
 endif
+source $HOME/.config/nvim/settings/theme.vim
 
 inoremap jk <ESC>
 
@@ -151,9 +152,6 @@ set smartindent
 
 set nocompatible
 
-" Ignore case when searching
-" set ignorecase
-
 " When searching try to be smart about cases 
 set smartcase
 
@@ -162,20 +160,6 @@ set clipboard+=unnamedplus
 set termguicolors
 
 syntax enable
-
-set background=dark
-
-" For dark theme
-let g:vscode_style = "dark"
-" Enable transparent background
-let g:vscode_transparency = 1
-" Enable italic comment
-let g:vscode_italic_comment = 1
-" Disable nvim-tree background color
-let g:vscode_disable_nvimtree_bg = v:true
-
-colorscheme darcula
-" let g:airline_theme = 'vscode'
 
 " from readme
 " if hidden is not set, TextEdit might fail.
@@ -200,14 +184,6 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"     \ 'javascript.jsx': ['tcp://127.0.0.1:2089']
-"     \ }
-
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 command! -bang -nargs=* Rg call fzf#vim#grep("rg -M 100 --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({}), <bang>0)
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--reverse'}), <bang>0)
