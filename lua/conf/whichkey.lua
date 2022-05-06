@@ -141,8 +141,8 @@ local mappings = {
   A = {
     name = "CodeAction",
 
-    r = { "<plug>(coc-rename)<cr>", "Rename Variables"},
-    o = { "<cmd>CocList outline<cr>", "Show Outline"},
+    r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename Symbols"},
+    c = { "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Show Actions"},
   }
 
 }

@@ -15,7 +15,4 @@ require "conf.bufferline"
 require "conf.auto-session"
 require "conf.whichkey"
 
--- LSP
--- Autocomplete
-require "conf.cmp"
 

@@ -1,3 +1,4 @@
+local nvim_command = vim.api.nvim_command
 local M = {}
 local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -16,18 +17,18 @@ local config = {
     virtual_text = true,
     -- show signs
     signs = {
-      active = signs,
+        active = signs,
     },
     update_in_insert = true,
     underline = false,
     severity_sort = true,
     float = {
-      focusable = false,
-      style = "minimal",
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
     },
 }
 
@@ -35,24 +36,24 @@ local function diagnostic_highlight()
     require("todo-comments").setup({})
 
     vim.highlight.create(
-      "DiagnosticUnderlineWarn",
-      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#EBCB8B" },
-      false
+        "DiagnosticUnderlineWarn",
+        { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#EBCB8B" },
+        false
     )
     vim.highlight.create(
-      "DiagnosticUnderlineError",
-      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#BF616A" },
-      false
+        "DiagnosticUnderlineError",
+        { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#BF616A" },
+        false
     )
     vim.highlight.create(
-      "DiagnosticUnderlineInfo",
-      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#88C0D0" },
-      false
+        "DiagnosticUnderlineInfo",
+        { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#88C0D0" },
+        false
     )
     vim.highlight.create(
-      "DiagnosticUnderlineHint",
-      { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#5E81AC" },
-      false
+        "DiagnosticUnderlineHint",
+        { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#5E81AC" },
+        false
     )
     vim.highlight.create("DiagnosticWarn", { ctermfg = "3", guifg = "#EBCB8B" }, false)
     vim.highlight.create("DiagnosticError", { ctermfg = "1", guifg = "#BF616A" }, false)
@@ -60,19 +61,19 @@ local function diagnostic_highlight()
     vim.highlight.create("DiagnosticHint", { ctermfg = "7", guifg = "#5E81AC" }, false)
 end
 
-M.setup = function ()
+M.setup = function()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-       vim.lsp.handlers.hover, {
-         -- Use a sharp border with `FloatBorder` highlights
-         border = "rounded"
-       }
+        vim.lsp.handlers.hover, {
+            -- Use a sharp border with `FloatBorder` highlights
+            border = "rounded"
+        }
     )
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-       vim.lsp.handlers.signature_help, {
-         -- Use a sharp border with `FloatBorder` highlights
-         border = "rounded"
-       }
+        vim.lsp.handlers.signature_help, {
+            -- Use a sharp border with `FloatBorder` highlights
+            border = "rounded"
+        }
     )
 
     vim.diagnostic.config(config)
@@ -80,31 +81,31 @@ M.setup = function ()
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
-    local status_ok, illuminate = pcall(require, "illuminate")
-    if not status_ok then
-      return
+    if client.resolved_capabilities.document_highlight then
+        local status_ok, illuminate = pcall(require, "illuminate")
+        if not status_ok then
+            return
+        end
+        illuminate.on_attach(client)
     end
-    illuminate.on_attach(client)
-  end
 end
 
 local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
 -- local notify_status_ok, notify = pcall(require, "notify")
@@ -113,17 +114,18 @@ end
 -- end
 
 M.on_attach = function(client, bufnr)
-   vim.notify(client.name .. " starting...")
-  -- TODO: refactor this into a method that checks if string in list
+    vim.notify(client.name .. " starting...")
+    -- TODO: refactor this into a method that checks if string in list
 
-  if client.name == "jdt.ls" then
-    require("jdtls").setup_dap { hotcodereplace = "auto" }
-    require("jdtls.dap").setup_dap_main_class_configs()
-    vim.lsp.codelens.refresh()
-  end
-  lsp_keymaps(bufnr)
-  lsp_highlight_document(client)
-  require("aerial").on_attach(client, bufnr)
+    if client.name == "jdt.ls" then
+        require("jdtls").setup_dap { hotcodereplace = "auto" }
+        require("jdtls.dap").setup_dap_main_class_configs()
+        vim.lsp.codelens.refresh()
+    end
+    lsp_keymaps(bufnr)
+    lsp_highlight_document(client)
+    require("aerial").on_attach(client, bufnr)
+    require("lsp_signature").on_attach(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -131,38 +133,38 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
-  return
+    return
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 function M.enable_format_on_save()
-  vim.cmd [[
+    vim.cmd [[
     augroup format_on_save
       autocmd! 
       autocmd BufWritePre * lua vim.lsp.buf.formatting()
     augroup end
   ]]
-  vim.notify "Enabled format on save"
+    vim.notify "Enabled format on save"
 end
 
 function M.disable_format_on_save()
-  M.remove_augroup "format_on_save"
-  vim.notify "Disabled format on save"
+    M.remove_augroup "format_on_save"
+    vim.notify "Disabled format on save"
 end
 
 function M.toggle_format_on_save()
-  if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
-    M.enable_format_on_save()
-  else
-    M.disable_format_on_save()
-  end
+    if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
+        M.enable_format_on_save()
+    else
+        M.disable_format_on_save()
+    end
 end
 
 function M.remove_augroup(name)
-  if vim.fn.exists("#" .. name) == 1 then
-    vim.cmd("au! " .. name)
-  end
+    if vim.fn.exists("#" .. name) == 1 then
+        vim.cmd("au! " .. name)
+    end
 end
 
 vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]]

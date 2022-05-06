@@ -29,7 +29,9 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
-
+Plug 'RRethy/vim-illuminate'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'ray-x/lsp_signature.nvim'
 
 " Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lua/plenary.nvim'

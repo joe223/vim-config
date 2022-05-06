@@ -3,5 +3,8 @@ if not status_ok then
 	return
 end
 
-require("lsp.lsp-installer")
-require("lsp.handlers").setup()
+-- Autocomplete
+require "lsp.cmp"
+require "lsp.lsp-signature"
+require "lsp.lsp-installer"
+require "lsp.handlers".setup()
