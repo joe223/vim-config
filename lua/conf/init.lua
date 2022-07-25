@@ -15,4 +15,5 @@ require "conf.bufferline"
 require "conf.auto-session"
 require "conf.whichkey"
 
+require "conf.projects"
 

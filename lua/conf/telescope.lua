@@ -176,4 +176,5 @@ telescope.setup {
 -- telescope.load_extension("fzf")
 -- telescope.load_extension('aerial')
 telescope.load_extension("ui-select")
+telescope.load_extension("projects")
 -- load project extension. see project.lua file

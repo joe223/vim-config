@@ -27,14 +27,12 @@ local config = {
         style = "minimal",
         border = "rounded",
         source = "always",
-        header = "",
+        header = "LSP",
         prefix = "",
     },
 }
 
 local function diagnostic_highlight()
-    require("todo-comments").setup({})
-
     vim.highlight.create(
         "DiagnosticUnderlineWarn",
         { cterm = "undercurl", ctermfg = "1", gui = "undercurl", guifg = "NONE", guisp = "#EBCB8B" },
@@ -168,5 +166,8 @@ function M.remove_augroup(name)
 end
 
 vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]]
+vim.cmd [[
+    autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+]]
 
 return M

@@ -2,6 +2,10 @@ set cursorline
 set undodir=~/.vim/undo-dir
 set undofile
 set history=1000
+set foldlevel=1
+set foldmethod=syntax
+set foldnestmax=100
+set nofoldenable
 
 if exists('+termguicolors')
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -16,6 +20,10 @@ let g:far#enable_undo=1
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+" UI Settings
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'rcarriga/nvim-notify'
+Plug 'stevearc/dressing.nvim'
 
 Plug 'folke/which-key.nvim'
 
@@ -31,6 +39,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'RRethy/vim-illuminate'
 Plug 'glepnir/lspsaga.nvim'
+Plug 'folke/todo-comments.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 
 " Plug 'liuchengxu/vista.vim'
@@ -46,7 +55,7 @@ Plug 'sindrets/diffview.nvim'
 
 " Version Control
 Plug 'lewis6991/gitsigns.nvim'
-
+Plug 'tpope/vim-fugitive'
 
 " Themes
 "Plug 'morhetz/gruvbox'
@@ -56,13 +65,12 @@ Plug 'doums/darcula'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Project manage
-Plug 'rmagatti/auto-session'
-Plug 'rmagatti/session-lens'
+"Plug 'rmagatti/auto-session'
+"Plug 'rmagatti/session-lens'
 " Plug 'nvim-pack/nvim-spectre'
 Plug 'folke/trouble.nvim'
 Plug 'brooth/far.vim'
-Plug 'folke/todo-comments.nvim'
-
+Plug 'ahmedkhalf/project.nvim'
 " Nvim Treesitter configurations and abstraction layer & highlight
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -100,12 +108,6 @@ Plug 'sheerun/vim-polyglot'
 
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
-" UI Settings
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-Plug 'rcarriga/nvim-notify'
-Plug 'stevearc/dressing.nvim'
-
 " Initialize plugin system
 call plug#end()
 
@@ -187,8 +189,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+syntax sync minlines=256
+
 command! -bang -nargs=* Rg call fzf#vim#grep("rg -M 100 --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({}), <bang>0)
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--reverse'}), <bang>0)
+command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
 command! -bang -nargs=* AgWords call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--reverse --delimiter : --nth 4..'}), <bang>0)
 
 command! -bang -nargs=* RgFiles

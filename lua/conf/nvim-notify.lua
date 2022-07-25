@@ -1,4 +1,5 @@
-require("notify").setup({
+notify = require("notify")
+notify.setup({
   -- Minimum level to show
   level = "info",
 
@@ -15,10 +16,10 @@ require("notify").setup({
   render = "default",
 
   -- Default timeout for notifications
-  timeout = 5000,
+  timeout = 3000,
 
   -- Max number of columns for messages
-  max_width = nil,
+  max_width = 240,
   -- Max number of lines for a message
   max_height = nil,
 
@@ -38,3 +39,4 @@ require("notify").setup({
     TRACE = "✎",
   },
 })
+vim.notify = notify

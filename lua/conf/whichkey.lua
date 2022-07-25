@@ -143,8 +143,12 @@ local mappings = {
 
     r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename Symbols"},
     c = { "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Show Actions"},
-  }
+  },
 
+  W = {
+    name = "Workspace",
+    r = { "<cmd>Telescope projects<CR>", "Open project list" }
+  }
 }
 which_key.register(mappings, opts)
 which_key.setup(setup)
