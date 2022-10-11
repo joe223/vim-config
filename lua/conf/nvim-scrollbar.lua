@@ -1,4 +1,4 @@
-local colors = require("vscode.colors").generate()
+local colors = require("vscode.colors")
 
 require("scrollbar").setup({
     show = true,

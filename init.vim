@@ -75,8 +75,8 @@ Plug 'ahmedkhalf/project.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Search
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 " Plug 'mileszs/ack.vim'
 
@@ -198,6 +198,6 @@ command! -bang -nargs=* AgWords call fzf#vim#ag(<q-args>, fzf#vim#with_preview({
 
 command! -bang -nargs=* RgFiles
 
-nnoremap <C-p> :Ag<Cr>
-nnoremap <C-f> :FzfLua files<Cr>
+nnoremap <C-p> :lua require'fzf-lua'.git_files({ prompt="LS> ", cwd="~/<folder>" })<Cr>
+nnoremap <C-f> :lua require'fzf-lua'.live_grep({ cmd = "git grep --line-number --column --color=always" })<Cr>
 nnoremap <leader>h :WhichKey<Cr>
