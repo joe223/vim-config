@@ -189,6 +189,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+function! s:go_fmt()
+  cexpr system('gofmt -e -w ' . expand('%'))
+  edit!
+endfunction
+
 syntax sync minlines=256
 
 command! -bang -nargs=* Rg call fzf#vim#grep("rg -M 100 --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({}), <bang>0)
@@ -197,6 +202,7 @@ command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '
 command! -bang -nargs=* AgWords call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--reverse --delimiter : --nth 4..'}), <bang>0)
 
 command! -bang -nargs=* RgFiles
+command! -bang -nargs=* Gofmt call system('gofmt -e -w ' . expand('%'))
 
 nnoremap <C-p> :lua require'fzf-lua'.git_files({ prompt="LS> ", cwd="~/<folder>" })<Cr>
 nnoremap <C-f> :lua require'fzf-lua'.live_grep({ cmd = "git grep --line-number --column --color=always" })<Cr>

@@ -95,8 +95,7 @@ local mappings = {
 
   G = {
      name = "Git",
-     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-     f = { "<cmd>DiffviewFileHistory<CR>", "File History" },
+     f = { "<cmd>DiffviewFileHistory %<CR>", "File History(current file)" },
      p = { "<cmd>DiffviewOpen<CR>", "Diff Project" },
      n = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
      N = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
