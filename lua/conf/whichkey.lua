@@ -140,8 +140,8 @@ local mappings = {
     A = {
         name = "CodeAction",
 
-        r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename Symbols" },
-        c = { "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Show Actions" },
+        r = { "<cmd>Lspsaga rename<CR>", "Rename Symbols" },
+        c = { "<cmd>Lspsaga code_action<CR>", "Show Actions" },
     },
 
     W = {
