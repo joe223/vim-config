@@ -67,7 +67,7 @@ local plugins = {
     "mattn/emmet-vim",
     "maxmellon/vim-jsx-pretty",
     "mhinz/vim-startify",
-    { "neoclide/coc.nvim", branch = "release" },
+    -- { "neoclide/coc.nvim", branch = "release" },
     "psliwka/vim-smoothie",
 
     --------------

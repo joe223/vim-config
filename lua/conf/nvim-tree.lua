@@ -7,9 +7,9 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
     ignore_buffer_on_setup = false,
-    open_on_setup = false,
+    open_on_setup = true,
     open_on_setup_file = false,
-    open_on_tab = false,
+    open_on_tab = true,
     sort_by = "name",
     update_cwd = true,
     view = {
@@ -38,6 +38,7 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         icons = {
             webdev_colors = true,
         },
+        highlight_opened_files = 'all'
     },
     hijack_directories = {
         enable = true,
@@ -54,8 +55,8 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         args = {},
     },
     diagnostics = {
-        enable = false,
-        show_on_dirs = false,
+        enable = true,
+        show_on_dirs = true,
         icons = {
             hint = "",
             info = "",
@@ -81,7 +82,7 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         },
         open_file = {
             quit_on_open = false,
-            resize_window = false,
+            resize_window = true,
             window_picker = {
                 enable = true,
                 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
@@ -90,7 +91,7 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
                     buftype = { "nofile", "terminal", "help" },
                 },
             },
-        },
+        }
     },
     trash = {
         cmd = "trash",

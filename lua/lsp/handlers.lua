@@ -20,15 +20,15 @@ local config = {
         active = signs,
     },
     update_in_insert = true,
-    underline = false,
+    underline = true,
     severity_sort = true,
     float = {
         focusable = false,
-        style = "minimal",
+        --style = "minimal",
         border = "rounded",
-        source = "always",
-        header = "LSP",
-        prefix = "",
+        source = "if_many",
+        header = "",
+        prefix = "🐷 🐰 🐶 ",
     },
 }
 
@@ -124,6 +124,13 @@ M.on_attach = function(client, bufnr)
     lsp_highlight_document(client)
     require("aerial").on_attach(client, bufnr)
     require("lsp_signature").on_attach(client, bufnr)
+
+    --vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]]
+    --autocmd CursorHold * lua vim.lsp.diagnostic.get_line_diagnostics()
+    vim.cmd [[
+        autocmd CursorHold * lua vim.diagnostic.open_float()
+    ]]
+    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -140,7 +147,7 @@ function M.enable_format_on_save()
     vim.cmd [[
     augroup format_on_save
       autocmd! 
-      autocmd BufWritePre * lua vim.lsp.buf.formatting()
+      autocmd BufWritePre * lua vim.lsp.buf.format()
     augroup end
   ]]
     vim.notify "Enabled format on save"
@@ -164,10 +171,5 @@ function M.remove_augroup(name)
         vim.cmd("au! " .. name)
     end
 end
-
-vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]]
-vim.cmd [[
-    autocmd CursorHold * lua vim.lsp.diagnostic.get_line_diagnostics()
-]]
 
 return M

@@ -16,4 +16,4 @@ require "conf.auto-session"
 require "conf.whichkey"
 
 require "conf.projects"
-
+require "conf.lspsaga"
