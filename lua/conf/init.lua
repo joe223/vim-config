@@ -17,3 +17,5 @@ require "conf.whichkey"
 
 require "conf.projects"
 require "conf.lspsaga"
+
+require "conf.mason"
