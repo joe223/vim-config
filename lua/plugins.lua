@@ -102,6 +102,11 @@ local plugins = {
     { "akinsho/bufferline.nvim", tag = "*" },
     "kyazdani42/nvim-tree.lua",
 
+    ---------------
+    -- Editor -----
+    ---------------
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim"
 }
 local opts = {}
 
