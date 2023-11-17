@@ -4,7 +4,9 @@ if not status_ok then
 end
 
 -- Autocomplete
+
+
 require "lsp.cmp"
+require "lsp.mason"
 require "lsp.lsp-signature"
---require "lsp.lsp-installer"
 require "lsp.handlers".setup()

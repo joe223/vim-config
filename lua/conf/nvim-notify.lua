@@ -44,4 +44,5 @@ vim.g.nvim_tree_window_picker_exclude = {
         "notify",
     }
 }
---vim.notify = notify
+
+vim.notify = notify

@@ -14,13 +14,17 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
+    -----------------
+    -- common deps --
+    -----------------
+    "nvim-lua/plenary.nvim",
+
     -------------
     -- UI
     -------------
     "rcarriga/nvim-notify",
     "stevearc/dressing.nvim",
     "folke/which-key.nvim",
-    "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
@@ -32,7 +36,7 @@ local plugins = {
     --------------
     -- Search
     ---------------
-    { "ibhagwan/fzf-lua", branch = "main" },
+    { "ibhagwan/fzf-lua",            branch = "main" },
 
     --------------
     -- Theme & UI
@@ -42,11 +46,20 @@ local plugins = {
     { "kyazdani42/nvim-web-devicons" },
     "Mofiqul/vscode.nvim",
     "doums/darcula",
-    "lukas-reineke/indent-blankline.nvim",
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {
+            indent = {
+                char = "┆"
+            }
+        }
+    },
 
     --------------
     -- LSP
     --------------
+    { "neoclide/coc.nvim",       branch = "release" },
     { "akinsho/bufferline.nvim", tag = "*", },
     "neovim/nvim-lspconfig",
     "williamboman/nvim-lsp-installer",
@@ -68,7 +81,7 @@ local plugins = {
     "maxmellon/vim-jsx-pretty",
     "mhinz/vim-startify",
     -- { "neoclide/coc.nvim", branch = "release" },
-    "psliwka/vim-smoothie",
+    --"psliwka/vim-smoothie",
 
     --------------
     -- Code manage
@@ -98,7 +111,7 @@ local plugins = {
     --------------
     -- File manage
     --------------
-    -- { "iamcco/markdown-preview.nvim", do = "cd app && yarn install"  }
+    --{ "iamcco/markdown-preview.nvim", do = "cd app && yarn install"  },
     { "akinsho/bufferline.nvim", tag = "*" },
     "kyazdani42/nvim-tree.lua",
 
@@ -106,7 +119,8 @@ local plugins = {
     -- Editor -----
     ---------------
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim"
+    "williamboman/mason-lspconfig.nvim",
+    "nvim-pack/nvim-spectre"
 }
 local opts = {}
 

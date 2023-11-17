@@ -40,5 +40,6 @@
     "prettier.singleQuote": true,
     "prettier.trailingComma": "none",
     "prettier.jsxSingleQuote": false,
-    "prettier.semi": false
+    "prettier.semi": false,
+    "snippets.ultisnips.pythonPrompt": false
 }
