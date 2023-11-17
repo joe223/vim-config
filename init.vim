@@ -16,109 +16,14 @@ endif
 let g:fzf_layout = { 'down': '~80%'}
 let g:far#enable_undo=1
 
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-"call plug#begin('~/.vim/plugged')
-"" UI Settings
-"Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-"Plug 'rcarriga/nvim-notify'
-"Plug 'stevearc/dressing.nvim'
-
-"Plug 'folke/which-key.nvim'
-
-"" LSP
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'williamboman/nvim-lsp-installer'
-"Plug 'hrsh7th/cmp-nvim-lsp'
-"Plug 'hrsh7th/cmp-buffer'
-"Plug 'hrsh7th/cmp-path'
-"Plug 'hrsh7th/cmp-cmdline'
-"Plug 'hrsh7th/nvim-cmp'
-"Plug 'saadparwaiz1/cmp_luasnip'
-"Plug 'L3MON4D3/LuaSnip'
-"Plug 'RRethy/vim-illuminate'
-"Plug 'glepnir/lspsaga.nvim'
-"Plug 'folke/todo-comments.nvim'
-"Plug 'ray-x/lsp_signature.nvim'
-
-"" Plug 'liuchengxu/vista.vim'
-"Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim'
-"Plug 'nvim-telescope/telescope-file-browser.nvim'
-"" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-"Plug 'nvim-telescope/telescope-ui-select.nvim'
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'kyazdani42/nvim-web-devicons'
-"Plug 'kyazdani42/nvim-tree.lua'
-"Plug 'sindrets/diffview.nvim'
-
-"" Version Control
-"Plug 'lewis6991/gitsigns.nvim'
-"Plug 'tpope/vim-fugitive'
-
-"" Themes
-""Plug 'morhetz/gruvbox'
-""Plug 'joshdick/onedark.vim'
-"Plug 'Mofiqul/vscode.nvim'
-"Plug 'doums/darcula'
-"Plug 'lukas-reineke/indent-blankline.nvim'
-
-"" Project manage
-""Plug 'rmagatti/auto-session'
-""Plug 'rmagatti/session-lens'
-"" Plug 'nvim-pack/nvim-spectre'
-"Plug 'folke/trouble.nvim'
-"Plug 'brooth/far.vim'
-"Plug 'ahmedkhalf/project.nvim'
-"" Nvim Treesitter configurations and abstraction layer & highlight
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-"" Search
-""Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-""Plug 'junegunn/fzf.vim'
-"Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
-"" Plug 'mileszs/ack.vim'
-
-"" Plug 'airblade/vim-gitgutter'
-"Plug 'christoomey/vim-tmux-navigator'
-"" Plug 'jiangmiao/auto-pairs'
-"" Plug 'kien/rainbow_parentheses.vim'
-"Plug 'mattn/emmet-vim'
-"Plug 'maxmellon/vim-jsx-pretty'
-"Plug 'mhinz/vim-startify'
-""Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'psliwka/vim-smoothie'
-"Plug 'scrooloose/nerdcommenter'
-
-"" Performance issue in monorepo
-"" Plug 'nvim-lualine/lualine.nvim'
-
-""Status line
-"Plug 'feline-nvim/feline.nvim'
-
-"" Plug 'dense-analysis/ale'
-"" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-"" Plug 'wfxr/minimap.vim'
-"Plug 'petertriho/nvim-scrollbar'
-            
-"" Code manage
-"Plug 'stevearc/aerial.nvim' " A code outline window for skimming and quick navigation
-"Plug 'sheerun/vim-polyglot'
-
-"" If you have nodejs and yarn
-"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-"" Initialize plugin system
-"call plug#end()
 
 
 lua << EOF
-require "init"
+    require "init"
 EOF
 
-"if has_key(plugs, "coc.nvim")
-    "source $HOME/.config/nvim/settings/coc.vim
-"endif
+source $HOME/.config/nvim/settings/coc.vim
+
 source $HOME/.config/nvim/settings/theme.vim
 
 inoremap jk <ESC>
@@ -201,3 +106,4 @@ command! -bang -nargs=* Gofmt call system('gofmt -e -w ' . expand('%'))
 nnoremap <C-p> :lua require'fzf-lua'.git_files({ prompt="LS> ", cwd="~/<folder>" })<Cr>
 nnoremap <C-f> :lua require'fzf-lua'.live_grep({ cmd = "git grep --line-number --column --color=always" })<Cr>
 nnoremap <leader>h :WhichKey<Cr>
+

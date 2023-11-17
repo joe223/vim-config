@@ -28,7 +28,7 @@ local config = {
         border = "rounded",
         source = "if_many",
         header = "",
-        prefix = "🐷 🐰 🐶 ",
+        prefix = "🐰 🐱 🐶 🌛",
     },
 }
 
@@ -60,22 +60,32 @@ local function diagnostic_highlight()
 end
 
 M.setup = function()
+    vim.notify("handlers setup...")
+
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover, {
-        -- Use a sharp border with `FloatBorder` highlights
-        border = "rounded"
-    }
+            -- Use a sharp border with `FloatBorder` highlights
+            border = "rounded"
+        }
     )
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
         vim.lsp.handlers.signature_help, {
-        -- Use a sharp border with `FloatBorder` highlights
-        border = "rounded"
-    }
+            -- Use a sharp border with `FloatBorder` highlights
+            border = "rounded"
+        }
     )
 
     vim.diagnostic.config(config)
     diagnostic_highlight()
+    vim.api.nvim_create_autocmd("CursorHold", {
+        pattern = { "*" },
+        command = "lua vim.diagnostic.open_float()",
+    })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*" },
+        command = "lua vim.lsp.buf.format()",
+    })
 end
 
 local function lsp_highlight_document(client)
@@ -106,31 +116,18 @@ local function lsp_keymaps(bufnr)
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 end
 
--- local notify_status_ok, notify = pcall(require, "notify")
--- if not notify_status_ok then
---   return
--- end
 
 M.on_attach = function(client, bufnr)
     vim.notify(client.name .. " starting...")
-    -- TODO: refactor this into a method that checks if string in list
-
-    if client.name == "jdt.ls" then
-        require("jdtls").setup_dap { hotcodereplace = "auto" }
-        require("jdtls.dap").setup_dap_main_class_configs()
-        vim.lsp.codelens.refresh()
-    end
+    --if client.name == "jdt.ls" then
+    --require("jdtls").setup_dap { hotcodereplace = "auto" }
+    --require("jdtls.dap").setup_dap_main_class_configs()
+    --vim.lsp.codelens.refresh()
+    --end
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
     require("aerial").on_attach(client, bufnr)
     require("lsp_signature").on_attach(client, bufnr)
-
-    --vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]]
-    --autocmd CursorHold * lua vim.lsp.diagnostic.get_line_diagnostics()
-    vim.cmd [[
-        autocmd CursorHold * lua vim.diagnostic.open_float()
-    ]]
-    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -146,7 +143,7 @@ M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 function M.enable_format_on_save()
     vim.cmd [[
     augroup format_on_save
-      autocmd! 
+      autocmd!
       autocmd BufWritePre * lua vim.lsp.buf.format()
     augroup end
   ]]
