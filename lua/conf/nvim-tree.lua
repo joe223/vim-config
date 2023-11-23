@@ -6,7 +6,7 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     hijack_cursor = false,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
-    open_on_tab = true,
+    open_on_tab = false,
     sort_by = "name",
     update_cwd = true,
     view = {
@@ -32,8 +32,8 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         highlight_opened_files = 'all'
     },
     hijack_directories = {
-        enable = true,
-        auto_open = true,
+        enable = false,
+        auto_open = false,
     },
     update_focused_file = {
         enable = false,

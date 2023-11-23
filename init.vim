@@ -22,7 +22,7 @@ lua << EOF
     require "init"
 EOF
 
-source $HOME/.config/nvim/settings/coc.vim
+"source $HOME/.config/nvim/settings/coc.vim
 
 source $HOME/.config/nvim/settings/theme.vim
 
