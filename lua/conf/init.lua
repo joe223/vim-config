@@ -12,8 +12,10 @@ require "conf.nvim-notify"
 
 --require "conf.barbar"
 require "conf.bufferline"
-require "conf.auto-session"
+-- require "conf.auto-session"
 require "conf.whichkey"
 
 require "conf.projects"
 require "conf.lspsaga"
+
+-- require "conf.lua-snip"

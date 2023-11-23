@@ -16,10 +16,10 @@ notify.setup({
     render = "default",
 
     -- Default timeout for notifications
-    timeout = 2000,
+    timeout = 2400,
 
     -- Max number of columns for messages
-    max_width = 60,
+    max_width = 100,
     -- Max number of lines for a message
     max_height = nil,
 
@@ -28,7 +28,7 @@ notify.setup({
     background_colour = "Normal",
 
     -- Minimum width for notification windows
-    minimum_width = 50,
+    minimum_width = 70,
 
     -- Icons for the different levels
     icons = {

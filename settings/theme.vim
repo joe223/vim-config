@@ -9,7 +9,8 @@ let g:vscode_italic_comment = 1
 " Disable nvim-tree background color
 let g:vscode_disable_nvimtree_bg = v:true
 
-colorscheme darcula
+"colorscheme darcula
+colorscheme vscode
 
 hi DiagnosticError guifg=#e45454
 hi DiagnosticWarn  guifg=#ff942f
