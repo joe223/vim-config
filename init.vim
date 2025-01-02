@@ -104,6 +104,8 @@ command! -bang -nargs=* RgFiles
 command! -bang -nargs=* Gofmt call system('gofmt -e -w ' . expand('%'))
 
 nnoremap <C-p> :lua require'fzf-lua'.git_files({ prompt="LS> ", cwd="~/<folder>" })<Cr>
-nnoremap <C-f> :lua require'fzf-lua'.live_grep({ cmd = "git grep --line-number --column --color=always" })<Cr>
+nnoremap <C-f> :lua require'fzf-lua'.live_grep({ cmd = "git grep --line-number --column --color=always", cwd="~/<folder>"  })<Cr>
+nnoremap <C-a> :Telescope ast_grep<Cr>
+
 nnoremap <leader>h :WhichKey<Cr>
 

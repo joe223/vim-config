@@ -10,7 +10,14 @@ let g:vscode_italic_comment = 1
 let g:vscode_disable_nvimtree_bg = v:true
 
 "colorscheme darcula
-colorscheme vscode
+"colorscheme vscode
+
+colorscheme everforest
+
+let g:everforest_background = 'hard'
+
+" For better performance
+let g:everforest_better_performance = 1
 
 hi DiagnosticError guifg=#e45454
 hi DiagnosticWarn  guifg=#ff942f

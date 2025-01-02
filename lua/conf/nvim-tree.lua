@@ -6,7 +6,7 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     hijack_cursor = false,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
-    open_on_tab = false,
+    open_on_tab = true,
     sort_by = "name",
     update_cwd = true,
     view = {
@@ -36,9 +36,11 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         auto_open = false,
     },
     update_focused_file = {
-        enable = false,
-        update_cwd = false,
-        ignore_list = {},
+        enable = true,
+        update_cwd = true,
+        ignore_list = {
+            "node_modules"
+        },
     },
     system_open = {
         cmd = nil,

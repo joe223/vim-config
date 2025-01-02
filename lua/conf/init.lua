@@ -18,4 +18,8 @@ require "conf.whichkey"
 require "conf.projects"
 require "conf.lspsaga"
 
+require "conf.nvim-web-devicons"
+--require "conf.navigator"
+
+--require "conf.lightbulb"
 -- require "conf.lua-snip"

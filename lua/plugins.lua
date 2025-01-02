@@ -19,6 +19,24 @@ local plugins = {
     -----------------
     "nvim-lua/plenary.nvim",
 
+
+    --------------
+    -- Theme & UI
+    --------------
+    --"doums/darcula",
+    "sainnhe/everforest",
+    "nvim-tree/nvim-web-devicons",
+    "Mofiqul/vscode.nvim",
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {
+            indent = {
+                char = "┆"
+            }
+        }
+    },
+
     -------------
     -- UI
     -------------
@@ -33,26 +51,13 @@ local plugins = {
     ----- Scroll
     "petertriho/nvim-scrollbar",
 
+    --{ 'kosayoda/nvim-lightbulb' },
+
     --------------
     -- Search
     ---------------
     { "ibhagwan/fzf-lua",        branch = "main" },
-
-    --------------
-    -- Theme & UI
-    --------------
-    --"doums/darcula",
-    "nvim-tree/nvim-web-devicons",
-    "Mofiqul/vscode.nvim",
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        opts = {
-            indent = {
-                char = "┆"
-            }
-        }
-    },
+    "Marskey/telescope-sg",
 
     --------------
     -- LSP
@@ -79,13 +84,34 @@ local plugins = {
     "kien/rainbow_parentheses.vim",
     "mattn/emmet-vim",
     "maxmellon/vim-jsx-pretty",
-    --"psliwka/vim-smoothie",
+    "psliwka/vim-smoothie",
+    --{
+    --'ray-x/navigator.lua',
+    --dependencies = {
+    --{
+    --'ray-x/guihua.lua',
+    --build = 'cd lua/fzy && make'
+    --},
+    --{ 'neovim/nvim-lspconfig' }
+    --}
+    --},
+
+    --- Add Tabby plugin
+    "TabbyML/vim-tabby",
 
     --------------
     -- Code manage
     --------------
     -- A code outline window for skimming and quick navigation
-    "stevearc/aerial.nvim",
+    {
+        'stevearc/aerial.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+    },
     "sheerun/vim-polyglot",
     "scrooloose/nerdcommenter",
 
@@ -102,15 +128,23 @@ local plugins = {
     "folke/trouble.nvim",
     "brooth/far.vim",
     "ahmedkhalf/project.nvim",
-    -- {"nvim-treesitter/nvim-treesitter", config = {do = ":TSUpdate"}},
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate"
+    },
 
 
     --------------
     -- File manage
     --------------
-    --{ "iamcco/markdown-preview.nvim", do = "cd app && yarn install"  },
     { "akinsho/bufferline.nvim", tag = "*" },
     "kyazdani42/nvim-tree.lua",
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 
     ---------------
     -- Editor -----
